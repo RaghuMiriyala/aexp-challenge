@@ -1,0 +1,23 @@
+### Send request to add events. 
+POST http://localhost:3000/addEvent
+content-type: application/json
+
+{
+    "name": "testing the performance",
+    "userId": "3"
+}
+
+### Test 2
+### Here, send request to get all events
+GET http://localhost:3000/getEvents
+content-type: application/json
+
+### Test 3
+### Get events by ID. Click on send request to get the response.
+GET http://localhost:3000/getEventsByUserId/3
+content-type: application/json
+
+### Test 4
+### HEre we are getting all users.
+GET http://localhost:3000/getUsers
+content-type: application/json
