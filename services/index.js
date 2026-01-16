@@ -31,17 +31,24 @@ fastify.get('/getEvents', async (request, reply) => {
 
 fastify.get('/getEventsByUserId/:id', async (request, reply) => {
     const { id } = request.params;
-    const user = await fetch('http://event.com/getUserById/' + id);
-    const userData = await user.json();
-    const userEvents = userData.events;
-    const eventArray = [];
+    // const user = await fetch('http://event.com/getUserById/' + id);
+    // const userData = await user.json();
+    // const userEvents = userData.events;
+    // const eventArray = [];
     
-    for(let i = 0; i < userEvents.length; i++) {
-        const event = await fetch('http://event.com/getEventById/' + userEvents[i]);
-        const eventData = await event.json();
-        eventArray.push(eventData);
-    }
-    reply.send(eventArray);
+    // for(let i = 0; i < userEvents.length; i++) {
+    //     const event = await fetch('http://event.com/getEventById/' + userEvents[i]);
+    //     const eventData = await event.json();
+    //     eventArray.push(eventData);
+    // }
+    const events = await fetch('http://event.com/getEvents');
+    const allEvents = await events.json();
+ 
+    const eventByID = allEvents.filter(
+     event => String(event.userId) === String(id)
+    );
+ 
+     reply.send(eventByID);
 });
 
 fastify.listen({ port: 3000 }, (err) => {
